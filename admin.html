@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — the 2nd closet</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/mascot.jpg" type="image/jpeg">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="admin.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+</head>
+<body class="admin-body">
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="index.html" class="logo">
+      <img class="logo__mascot" src="assets/mascot.jpg" alt="Mascota the 2nd closet">
+      <span>the 2nd closet<span class="logo__dot">.</span></span>
+    </a>
+    <div class="topbar__actions" style="margin-left:auto;">
+      <a class="btn btn--ghost" href="index.html" style="padding:8px 16px;">Ver sitio</a>
+      <button class="btn btn--outline" id="logoutBtn" style="display:none; padding:8px 16px;">Salir</button>
+    </div>
+  </div>
+</header>
+
+<main class="admin">
+
+  <div id="notConfigured" class="admin-panel" style="display:none;">
+    <h2>Falta conectar Supabase</h2>
+    <p>Completá <code>SUPABASE_URL</code> y <code>SUPABASE_ANON_KEY</code> en <code>config.js</code> para poder usar el panel. Mirá <code>supabase/schema.sql</code> para crear la base.</p>
+  </div>
+
+  <section id="loginView" class="admin-panel" style="display:none;">
+    <h2>Ingresar</h2>
+    <p class="admin-hint">Acceso solo para vos. Iniciá sesión con el usuario que creaste en Supabase (Authentication → Users).</p>
+    <form id="loginForm" class="admin-form">
+      <label>Email<input type="email" id="loginEmail" required autocomplete="username"></label>
+      <label>Contraseña<input type="password" id="loginPassword" required autocomplete="current-password"></label>
+      <button class="btn btn--primary" type="submit">Ingresar</button>
+      <p id="loginError" class="admin-error"></p>
+    </form>
+  </section>
+
+  <section id="dashboard" style="display:none;">
+    <div class="admin-panel">
+      <h2 id="formTitle">Agregar prenda</h2>
+      <form id="productForm" class="admin-form">
+        <input type="hidden" id="productId">
+        <label>Nombre<input type="text" id="fName" required placeholder='Ej: Buzo Bali'></label>
+        <div class="admin-form__row">
+          <label>Categoría
+            <select id="fCategory" required>
+              <option value="buzos">Buzos</option>
+              <option value="pantalones">Pantalones</option>
+              <option value="gorras">Gorras</option>
+              <option value="remeras">Remeras</option>
+              <option value="camperas">Camperas</option>
+            </select>
+          </label>
+          <label>Precio (ARS)<input type="number" id="fPrice" required min="0" step="500" placeholder="30000"></label>
+        </div>
+        <div class="admin-form__row">
+          <label>Estado
+            <select id="fCondition">
+              <option>10/10</option><option>9/10</option><option>8/10</option>
+              <option>7/10</option><option>6/10</option><option>5/10</option>
+            </select>
+          </label>
+          <label class="admin-checkbox"><input type="checkbox" id="fSold"> Vendido</label>
+        </div>
+        <label>Detalles (medidas, observaciones)<textarea id="fDetails" rows="3" placeholder="68 cm de largo · 62 cm de ancho."></textarea></label>
+        <label>Fotos<input type="file" id="fImages" accept="image/*" multiple></label>
+        <div id="fImagePreview" class="admin-preview"></div>
+        <div class="admin-form__actions">
+          <button class="btn btn--primary" type="submit" id="saveBtn">Guardar prenda</button>
+          <button class="btn btn--ghost" type="button" id="cancelEditBtn" style="display:none;">Cancelar edición</button>
+        </div>
+        <p id="formError" class="admin-error"></p>
+      </form>
+    </div>
+
+    <div class="admin-panel">
+      <h2>Catálogo (<span id="productCount">0</span>)</h2>
+      <div id="productList" class="admin-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>

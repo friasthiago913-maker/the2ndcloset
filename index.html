@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>the 2nd closet — ropa second hand</title>
+<meta name="description" content="the 2nd closet. Ropa second hand seleccionada a mano. Bs. As. / Zona Norte.">
+<link rel="icon" href="assets/mascot.jpg" type="image/jpeg">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+</head>
+<body>
+
+<header class="topbar" id="topbar">
+  <div class="topbar__inner">
+    <button class="burger" id="burger" aria-label="Abrir menú">☰</button>
+    <a href="#" class="logo">
+      <img class="logo__mascot" src="assets/mascot.jpg" alt="Mascota the 2nd closet">
+      <span>the 2nd closet<span class="logo__dot">.</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#catalogo" data-filter="all" class="nav__link active">Todo</a>
+      <a href="#catalogo" data-filter="buzos" class="nav__link">Buzos</a>
+      <a href="#catalogo" data-filter="pantalones" class="nav__link">Pantalones</a>
+      <a href="#catalogo" data-filter="gorras" class="nav__link">Gorras</a>
+      <a href="#catalogo" data-filter="remeras" class="nav__link">Remeras</a>
+      <a href="#catalogo" data-filter="camperas" class="nav__link">Camperas</a>
+    </nav>
+    <div class="topbar__actions">
+      <a class="icon-btn" href="https://www.instagram.com/the2ndcloset___/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.85.23 2.5.48.68.27 1.26.62 1.83 1.19.57.57.92 1.15 1.19 1.83.25.65.43 1.4.48 2.5.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.23 1.85-.48 2.5a4.9 4.9 0 0 1-1.19 1.83 4.9 4.9 0 0 1-1.83 1.19c-.65.25-1.4.43-2.5.48-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.85-.23-2.5-.48a4.9 4.9 0 0 1-1.83-1.19 4.9 4.9 0 0 1-1.19-1.83c-.25-.65-.43-1.4-.48-2.5C2.01 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.23-1.85.48-2.5.27-.68.62-1.26 1.19-1.83A4.9 4.9 0 0 1 5.56.56C6.2.31 6.96.13 8.06.08 9.16.02 9.5 0 12.2 0zm0 1.8c-2.65 0-2.97 0-4.02.06-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.7-.33.32-.53.63-.7 1.06-.13.32-.28.81-.32 1.71C4.13 6.9 4.12 7.2 4.12 9.9v4.2c0 2.65.01 2.97.07 4.02.04.9.19 1.39.32 1.71.17.43.37.74.7 1.06.32.33.63.53 1.06.7.32.13.81.28 1.71.32 1.05.06 1.37.07 4.02.07h.02c2.6 0 2.92-.01 3.98-.07.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.7.33-.32.53-.63.7-1.06.13-.32.28-.81.32-1.71.06-1.05.07-1.37.07-4.02V9.9c0-2.65-.01-2.97-.07-4.02-.04-.9-.19-1.39-.32-1.71a2.85 2.85 0 0 0-.7-1.06 2.85 2.85 0 0 0-1.06-.7c-.32-.13-.81-.28-1.71-.32C14.97 1.82 14.65 1.8 12 1.8zm0 4.6a5.6 5.6 0 1 1 0 11.2 5.6 5.6 0 0 1 0-11.2zm0 1.8a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6zm5.83-2a1.31 1.31 0 1 1 0 2.62 1.31 1.31 0 0 1 0-2.62z"/></svg>
+      </a>
+      <button class="icon-btn cart-btn" id="cartBtn" aria-label="Carrito">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7 4h-2l-1 2v1h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h11v-2h-11l1.1-2h6.9c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1h-13.6l-.94-2zm2 15c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <div class="hero__content">
+      <p class="hero__eyebrow">✦ bs. as. · zona norte ✦</p>
+      <h1 class="hero__title">Ropa second hand<br>con otra historia<span class="hero__dot">.</span></h1>
+      <p class="hero__subtitle">Prendas únicas, revisadas una por una. Cada publicación es una sola unidad — cuando se va, se va.</p>
+      <div class="hero__actions">
+        <a href="#catalogo" class="btn btn--primary">Ver catálogo</a>
+        <a href="https://www.instagram.com/the2ndcloset___/" target="_blank" rel="noopener" class="btn btn--ghost">@the2ndcloset___</a>
+      </div>
+    </div>
+    <div class="hero__mascot-wrap">
+      <div class="hero__bubble">¿nueva prenda?<br>siempre hay algo nuevo por acá</div>
+      <img class="hero__mascot" src="assets/mascot.jpg" alt="Mascota the 2nd closet">
+      <span class="hero__burst">1 SOLA<br>UNIDAD</span>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee__track">
+    <span>ROPA SECOND HAND ✦ ESTADO REVISADO PRENDA POR PRENDA ✦ ENVÍOS A TODO EL PAÍS ✦ UNA SOLA UNIDAD POR PUBLICACIÓN ✦ CONSULTAS POR WHATSAPP ✦ </span>
+    <span aria-hidden="true">ROPA SECOND HAND ✦ ESTADO REVISADO PRENDA POR PRENDA ✦ ENVÍOS A TODO EL PAÍS ✦ UNA SOLA UNIDAD POR PUBLICACIÓN ✦ CONSULTAS POR WHATSAPP ✦ </span>
+  </div>
+</div>
+
+<main id="catalogo" class="catalog">
+  <div class="catalog__header reveal">
+    <h2>Catálogo<span class="hero__dot">.</span></h2>
+    <div class="catalog__filters" id="filters">
+      <button class="chip active" data-filter="all">Todo</button>
+      <button class="chip" data-filter="buzos">Buzos</button>
+      <button class="chip" data-filter="pantalones">Pantalones</button>
+      <button class="chip" data-filter="gorras">Gorras</button>
+      <button class="chip" data-filter="remeras">Remeras</button>
+      <button class="chip" data-filter="camperas">Camperas</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<section class="about" id="nosotros">
+  <div class="about__texture" aria-hidden="true"></div>
+  <div class="about__inner reveal">
+    <img class="about__mascot" src="assets/mascot.jpg" alt="Mascota the 2nd closet">
+    <h2>the second closet.</h2>
+    <p>Ropa second hand seleccionada a mano, con historia y buen estado. Cada prenda pasa por una revisión antes de publicarse: le ponemos un puntaje de estado y contamos cualquier detalle, para que sepas exactamente qué estás comprando.</p>
+    <p>Con base en Buenos Aires, zona norte. Hacemos envíos a todo el país.</p>
+    <a href="https://www.instagram.com/the2ndcloset___/" target="_blank" rel="noopener" class="btn btn--outline">Seguinos en Instagram</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <a href="#" class="logo">
+      <img class="logo__mascot" src="assets/mascot.jpg" alt="Mascota the 2nd closet">
+      <span>the 2nd closet<span class="logo__dot">.</span></span>
+    </a>
+    <div class="footer__links">
+      <a href="https://www.instagram.com/the2ndcloset___/" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" id="footerWhatsapp">WhatsApp</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="admin.html">Admin</a>
+    </div>
+    <p class="footer__copy">© <span id="year"></span> the 2nd closet. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<!-- Modal producto -->
+<div class="modal" id="productModal">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel">
+    <button class="modal__close" data-close aria-label="Cerrar">✕</button>
+    <div class="modal__body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Drawer carrito -->
+<div class="drawer" id="cartDrawer">
+  <div class="drawer__backdrop" data-close-cart></div>
+  <div class="drawer__panel">
+    <div class="drawer__header">
+      <h3>Tu pedido</h3>
+      <button class="modal__close" data-close-cart aria-label="Cerrar">✕</button>
+    </div>
+    <div class="drawer__items" id="cartItems"></div>
+    <div class="drawer__footer">
+      <div class="drawer__total">
+        <span>Total</span>
+        <span id="cartTotal">$0</span>
+      </div>
+      <button class="btn btn--primary btn--block" id="waCheckoutBtn">Finalizar por WhatsApp</button>
+      <p class="drawer__hint">Te vamos a redirigir a WhatsApp con el detalle del pedido para coordinar pago y envío.</p>
+    </div>
+  </div>
+</div>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <img src="assets/mascot.jpg" alt="">
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

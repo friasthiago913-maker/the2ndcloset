@@ -1,0 +1,9 @@
+{
+  "name": "the-2nd-closet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio de the 2nd closet — ropa second hand",
+  "scripts": {
+    "dev": "npx serve -l 5173 ."
+  }
+}
