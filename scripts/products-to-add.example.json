@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Buzo Ejemplo",
+    "category": "buzos",
+    "price": 25000,
+    "condition": "9/10",
+    "details": "70 cm de largo · 58 cm de ancho.",
+    "sold": false,
+    "images": ["scratch/foto1.jpg", "scratch/foto2.jpg"]
+  }
+]
