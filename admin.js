@@ -168,6 +168,38 @@ if(!supabaseReady){
     return urls;
   }
 
+  // --- Importar desde Instagram ---
+  $("#igImportBtn").addEventListener("click", async () => {
+    const url = $("#igUrl").value.trim();
+    const status = $("#igImportStatus");
+    if(!url){
+      status.textContent = "Pegá un link de un post o reel primero.";
+      return;
+    }
+    status.textContent = "Trayendo foto y texto del post...";
+    $("#igImportBtn").disabled = true;
+    try{
+      const resp = await fetch("/api/instagram-import", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ url })
+      });
+      const data = await resp.json();
+      if(!resp.ok) throw new Error(data.error || "No se pudo importar.");
+      existingImages = [...existingImages, ...data.images];
+      if(data.caption && !$("#fDetails").value.trim()){
+        $("#fDetails").value = data.caption;
+      }
+      renderPreview();
+      status.textContent = `Traída ${data.images.length} foto(s). Revisá abajo y completá precio, categoría y estado.`;
+      $("#igUrl").value = "";
+    }catch(err){
+      status.textContent = "No pude importar (" + err.message + "). Podés cargar la foto a mano.";
+    }finally{
+      $("#igImportBtn").disabled = false;
+    }
+  });
+
   $("#productForm").addEventListener("submit", async e => {
     e.preventDefault();
     $("#formError").textContent = "";
@@ -177,7 +209,7 @@ if(!supabaseReady){
       let images = existingImages;
       if(pendingFiles.length > 0){
         const uploaded = await uploadImages(pendingFiles);
-        images = editingId ? [...existingImages, ...uploaded] : uploaded;
+        images = [...existingImages, ...uploaded];
       }
       const payload = {
         name: $("#fName").value.trim(),
