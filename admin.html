@@ -45,6 +45,17 @@
   </section>
 
   <section id="dashboard" style="display:none;">
+
+    <div class="admin-panel">
+      <h2>Importar desde Instagram</h2>
+      <p class="admin-hint">Pegá el link de un post o reel público y te traigo la primera foto y el texto para precargar el formulario de abajo. No siempre funciona (post privado, bloqueo temporal, o carrusel del que sólo trae la primera foto) — si falla, cargá la prenda a mano como siempre.</p>
+      <div class="admin-form__row">
+        <input type="url" id="igUrl" placeholder="https://www.instagram.com/p/XXXXXXXXX/" style="flex:1;">
+        <button class="btn btn--outline" type="button" id="igImportBtn">Traer del post</button>
+      </div>
+      <p id="igImportStatus" class="admin-hint"></p>
+    </div>
+
     <div class="admin-panel">
       <h2 id="formTitle">Agregar prenda</h2>
       <form id="productForm" class="admin-form">
